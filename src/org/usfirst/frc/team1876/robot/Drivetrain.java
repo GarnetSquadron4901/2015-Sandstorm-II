@@ -6,6 +6,8 @@ import edu.wpi.first.wpilibj.Talon;
 
 public class Drivetrain {
 	
+	
+	// TODO set constants
 	private final int FL_T = 1;
 	private final int FR_T = 1;
 	
@@ -41,6 +43,7 @@ public class Drivetrain {
 	}
 	
 	public void drive4D (double x, double y) {
+		// TODO change to arcade
 		robotDrive.tankDrive(x, y);
 	}
 	

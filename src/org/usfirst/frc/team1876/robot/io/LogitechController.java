@@ -5,6 +5,8 @@ import edu.wpi.first.wpilibj.buttons.Button;
 
 public class LogitechController {
 
+	// TODO finish this class
+	
 	private int aButton;
 	private int bButton;
 	private int xButton = 5;
