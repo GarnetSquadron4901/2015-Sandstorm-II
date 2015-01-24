@@ -23,12 +23,26 @@ public class LogitechController {
 	
 	Joystick joystick;
 	
+	final double DEADBAND_THRESHOLD = 0.10;
+	
 	public boolean isXButtonPressed () {
 		return joystick.getRawButton(xButton);
 	}
 	
 	public double getRightAxisX () {
-		return joystick.getRawAxis(rightXAxis);
+		return filterAxisDeadband(Math.abs(joystick.getRawAxis(rightXAxis)));
+	}
+	
+	public double filterAxisDeadband (double val) {
+		if (val > DEADBAND_THRESHOLD) {
+			return scale(val);
+		}
+		
+		return 0;
+	}
+	
+	public double scale (double val) {
+		return val;
 	}
 	
 	
