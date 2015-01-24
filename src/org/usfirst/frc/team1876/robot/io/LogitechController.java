@@ -30,11 +30,11 @@ public class LogitechController {
 	}
 	
 	public double getRightAxisX () {
-		return filterAxisDeadband(Math.abs(joystick.getRawAxis(rightXAxis)));
+		return filterAxisDeadband(joystick.getRawAxis(rightXAxis));
 	}
 	
 	public double filterAxisDeadband (double val) {
-		if (val > DEADBAND_THRESHOLD) {
+		if (Math.abs(val) > DEADBAND_THRESHOLD) {
 			return scale(val);
 		}
 		
