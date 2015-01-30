@@ -6,13 +6,13 @@ import edu.wpi.first.wpilibj.Victor;
 public class Drivetrain {
 
 	// TODO set constants
-	private final int FRONT_LEFT_TALON_PWN = 1;
+	private final int FRONT_LEFT_TALON_PWN = 2;
 	private final int FRONT_RIGHT_TALON_PWN = 1;
 
-	private final int BACK_LEFT_TALON_PWN = 1;
-	private final int BACK_RIGHT_TALON_PWN = 1;
+	private final int BACK_LEFT_TALON_PWN = 3;
+	private final int BACK_RIGHT_TALON_PWN = 0;
 
-	private final int STRAFE_VICTOR_PWN = 1;
+	private final int STRAFE_VICTOR_PWN = 4;
 
 	private Talon frontLeftTalon;
 	private Talon frontRightTalon;
