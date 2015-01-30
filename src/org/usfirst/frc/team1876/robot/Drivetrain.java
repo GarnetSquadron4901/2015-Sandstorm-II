@@ -36,8 +36,6 @@ public class Drivetrain {
 		middleTalon = new Talon (M_T);
 		
 		frontLeftEncoder = new Encoder (1, 2);
-		
-		robotDrive = new RobotDrive (frontLeftTalon, backLeftTalon, frontRightTalon, backRightTalon);
 	}
 	
 	public void FPSDrive(double moveValue, double rotateValue, double strafePower){
