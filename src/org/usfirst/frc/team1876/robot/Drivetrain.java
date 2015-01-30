@@ -62,8 +62,8 @@ public class Drivetrain {
           }	
           	frontLeftTalon.set(Leftpower);
 		backLeftTalon.set(Leftpower);
-		frontRightTalon.set(Rightpower);
-		backRightTalon.set(Rightpower);
+		frontRightTalon.set(-Rightpower);
+		backRightTalon.set(-Rightpower);
 		middleVictor.set(strafePower);
 	}
 	
