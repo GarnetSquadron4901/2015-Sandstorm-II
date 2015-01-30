@@ -24,8 +24,6 @@ public class Drivetrain {
 	
 	private Talon middleTalon;
 	
-	RobotDrive robotDrive;
-	
 	private Encoder frontLeftEncoder;
 	
 	public Drivetrain () {
@@ -42,9 +40,31 @@ public class Drivetrain {
 		robotDrive = new RobotDrive (frontLeftTalon, backLeftTalon, frontRightTalon, backRightTalon);
 	}
 	
-	public void drive4D (double x, double y) {
-		// TODO change to arcade
-		robotDrive.tankDrive(x, y);
+	public void FPSDrive(double moveValue, double rotateValue, double strafePower){
+		double Leftpower = 0.0;
+		double Rightpower = 0.0;
+        if (moveValue > 0.0) {
+            if (rotateValue > 0.0) {
+            	Leftpower = moveValue - rotateValue;
+            	Rightpower = Math.max(moveValue, rotateValue);
+            } else {
+            	Leftpower = Math.max(moveValue, -rotateValue);
+            	Rightpower = moveValue + rotateValue;
+            }
+        } else {
+            if (rotateValue > 0.0) {
+            	Leftpower = -Math.max(-moveValue, rotateValue);
+            	Rightpower = moveValue + rotateValue;
+            } else {
+            	Leftpower = moveValue - rotateValue;
+            	Rightpower = -Math.max(-moveValue, -rotateValue);
+            }
+          }	
+          	LeftDriveA.set(Leftpower);
+		LeftDriveB.set(Leftpower);
+		RightDriveA.set(Rightpower);
+		RightDriveB.set(Rightpower);
+		StrafeWheel.set(strafePower);
 	}
 	
 	public void driveSide (double x) {
