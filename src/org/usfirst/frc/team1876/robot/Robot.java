@@ -1,8 +1,5 @@
 package org.usfirst.frc.team1876.robot;
 
-import org.usfirst.frc.team1876.robot.autonomus.MoveDistanceRoutine;
-import org.usfirst.frc.team1876.robot.io.LogitechController;
-
 import edu.wpi.first.wpilibj.IterativeRobot;
 
 /**
@@ -15,12 +12,6 @@ import edu.wpi.first.wpilibj.IterativeRobot;
 public class Robot extends IterativeRobot {
 
 	Drivetrain drivetrain;
-	LogitechController lc;
-	
-	MoveDistanceRoutine mdr;
-
-	int autoTickCount = 0;
-	int autoMaxTickCount = 100;
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -29,9 +20,6 @@ public class Robot extends IterativeRobot {
 	public void robotInit()
 	{
 		drivetrain = new Drivetrain();
-		drivetrain.startFLEncoder();
-		
-		mdr = new MoveDistanceRoutine();
 	}
 
 	/**
@@ -39,7 +27,6 @@ public class Robot extends IterativeRobot {
 	 */
 	public void autonomousPeriodic()
 	{
-		mdr.update(drivetrain);
 
 	}
 
@@ -48,7 +35,7 @@ public class Robot extends IterativeRobot {
 	 */
 	public void teleopPeriodic()
 	{
-		// drivetrain.drive(x, y);
+		
 	}
 
 	/**

@@ -1,78 +1,97 @@
 package org.usfirst.frc.team1876.robot;
 
-import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.Victor;
 
 public class Drivetrain {
-	
-	
+
 	// TODO set constants
-	private final int FL_T = 1;
-	private final int FR_T = 1;
-	
-	private final int BL_T = 1;
-	private final int BR_T = 1;
-	
-	private final int M_V = 1;
+	private final int FRONT_LEFT_TALON_PWN = 1;
+	private final int FRONT_RIGHT_TALON_PWN = 1;
+
+	private final int BACK_LEFT_TALON_PWN = 1;
+	private final int BACK_RIGHT_TALON_PWN = 1;
+
+	private final int STRAFE_VICTOR_PWN = 1;
 
 	private Talon frontLeftTalon;
 	private Talon frontRightTalon;
-	
+
 	private Talon backLeftTalon;
 	private Talon backRightTalon;
+
+	private Victor strafeVictor;
+
 	
-	private Victor middleTalon;
-	
-	private Encoder frontLeftEncoder;
-	
-	public Drivetrain () {
-		frontLeftTalon = new Talon (FL_T);
-		frontRightTalon = new Talon (FR_T);
+	public Drivetrain()
+	{
+		frontLeftTalon = new Talon(FRONT_LEFT_TALON_PWN);
+		frontRightTalon = new Talon(FRONT_RIGHT_TALON_PWN);
+
+		backLeftTalon = new Talon(BACK_LEFT_TALON_PWN);
+		backRightTalon = new Talon(BACK_RIGHT_TALON_PWN);
+
+		strafeVictor = new Victor(STRAFE_VICTOR_PWN);
+	}
+
+	/**
+	 * First Person Shooter Drivetrain
+	 * 
+	 *   Emulates a FPS game controller
+	 * 
+	 * @param moveValue
+	 * @param rotateValue
+	 * @param strafePower
+	 */
+	public void FPSDrive(double moveValue, double rotateValue,
+			double strafePower)
+	{
+		double leftPower = 0.0;
+		double rightPower = 0.0;
+
+		if (moveValue > 0.0)
+		{
+			if (rotateValue > 0.0)
+			{
+				leftPower = moveValue - rotateValue;
+				rightPower = Math.max(moveValue, rotateValue);
+			} else
+			{
+				leftPower = Math.max(moveValue, -rotateValue);
+				rightPower = moveValue + rotateValue;
+			}
+		} else
+		{
+			if (rotateValue > 0.0)
+			{
+				leftPower = -Math.max(-moveValue, rotateValue);
+				rightPower = moveValue + rotateValue;
+			} else
+			{
+				leftPower = moveValue - rotateValue;
+				rightPower = -Math.max(-moveValue, -rotateValue);
+			}
+		}
 		
-		backLeftTalon = new Talon (BL_T);
-		backRightTalon = new Talon (BR_T);
-		
-		middleVictor = new Victor (M_V);
-		
-		frontLeftEncoder = new Encoder (1, 2);
+		setMotors(leftPower, rightPower, strafePower);
 	}
 	
-	public void FPSDrive(double moveValue, double rotateValue, double strafePower){
-		double Leftpower = 0.0;
-		double Rightpower = 0.0;
-		
-        if (moveValue > 0.0) {
-            if (rotateValue > 0.0) {
-            	Leftpower = moveValue - rotateValue;
-            	Rightpower = Math.max(moveValue, rotateValue);
-            } else {
-            	Leftpower = Math.max(moveValue, -rotateValue);
-            	Rightpower = moveValue + rotateValue;
-            }
-        } else {
-            if (rotateValue > 0.0) {
-            	Leftpower = -Math.max(-moveValue, rotateValue);
-            	Rightpower = moveValue + rotateValue;
-            } else {
-            	Leftpower = moveValue - rotateValue;
-            	Rightpower = -Math.max(-moveValue, -rotateValue);
-            }
-          }	
-          	frontLeftTalon.set(Leftpower);
-		backLeftTalon.set(Leftpower);
-		frontRightTalon.set(-Rightpower);
-		backRightTalon.set(-Rightpower);
-		middleVictor.set(strafePower);
+	/**
+	 * Set the motors' power
+	 * 
+	 * @param lp left power
+	 * @param rp right power
+	 * @param sp strafe power
+	 */
+	public void setMotors(double lp, double rp, double sp) {
+		frontLeftTalon.set(lp);
+		backLeftTalon.set(lp);
+		frontRightTalon.set(-rp);
+		backRightTalon.set(-rp);
+		strafeVictor.set(sp);
 	}
 	
-	public void startFLEncoder () {
-		frontLeftEncoder.reset();
-	}
 	
-	public int getFLEncoder () {
-		return frontLeftEncoder.get();
-	}
-	
+	// TODO method for wheel rotations
+
 }
