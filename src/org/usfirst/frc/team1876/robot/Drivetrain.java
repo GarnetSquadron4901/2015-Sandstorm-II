@@ -3,6 +3,7 @@ package org.usfirst.frc.team1876.robot;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.Talon;
+import edu.wpi.first.wpilibj.Victor;
 
 public class Drivetrain {
 	
@@ -14,7 +15,7 @@ public class Drivetrain {
 	private final int BL_T = 1;
 	private final int BR_T = 1;
 	
-	private final int M_T = 1;
+	private final int M_V = 1;
 
 	private Talon frontLeftTalon;
 	private Talon frontRightTalon;
@@ -22,7 +23,7 @@ public class Drivetrain {
 	private Talon backLeftTalon;
 	private Talon backRightTalon;
 	
-	private Talon middleTalon;
+	private Victor middleTalon;
 	
 	private Encoder frontLeftEncoder;
 	
@@ -33,7 +34,7 @@ public class Drivetrain {
 		backLeftTalon = new Talon (BL_T);
 		backRightTalon = new Talon (BR_T);
 		
-		middleTalon = new Talon (M_T);
+		middleVictor = new Victor (M_V);
 		
 		frontLeftEncoder = new Encoder (1, 2);
 	}
@@ -41,6 +42,7 @@ public class Drivetrain {
 	public void FPSDrive(double moveValue, double rotateValue, double strafePower){
 		double Leftpower = 0.0;
 		double Rightpower = 0.0;
+		
         if (moveValue > 0.0) {
             if (rotateValue > 0.0) {
             	Leftpower = moveValue - rotateValue;
@@ -58,15 +60,11 @@ public class Drivetrain {
             	Rightpower = -Math.max(-moveValue, -rotateValue);
             }
           }	
-          	LeftDriveA.set(Leftpower);
-		LeftDriveB.set(Leftpower);
-		RightDriveA.set(Rightpower);
-		RightDriveB.set(Rightpower);
-		StrafeWheel.set(strafePower);
-	}
-	
-	public void driveSide (double x) {
-		middleTalon.set(x);
+          	frontLeftTalon.set(Leftpower);
+		backLeftTalon.set(Leftpower);
+		frontRightTalon.set(Rightpower);
+		backRightTalon.set(Rightpower);
+		middleVictor.set(strafePower);
 	}
 	
 	public void startFLEncoder () {
