@@ -39,37 +39,37 @@ public class Drivetrain {
 	 * 
 	 *   Emulates a FPS game controller
 	 * 
-	 * @param moveValue
-	 * @param rotateValue
+	 * @param forwardValue
+	 * @param rotationValue
 	 * @param strafePower
 	 */
-	public void FPSDrive(double moveValue, double rotateValue,
+	public void FPSDrive(double forwardValue, double rotationValue,
 			double strafePower)
 	{
 		double leftPower = 0.0;
 		double rightPower = 0.0;
 
-		if (moveValue > 0.0)
+		if (forwardValue > 0.0)
 		{
-			if (rotateValue > 0.0)
+			if (rotationValue > 0.0)
 			{
-				leftPower = moveValue - rotateValue;
-				rightPower = Math.max(moveValue, rotateValue);
+				leftPower = forwardValue - rotationValue;
+				rightPower = Math.max(forwardValue, rotationValue);
 			} else
 			{
-				leftPower = Math.max(moveValue, -rotateValue);
-				rightPower = moveValue + rotateValue;
+				leftPower = Math.max(forwardValue, -rotationValue);
+				rightPower = forwardValue + rotationValue;
 			}
 		} else
 		{
-			if (rotateValue > 0.0)
+			if (rotationValue > 0.0)
 			{
-				leftPower = -Math.max(-moveValue, rotateValue);
-				rightPower = moveValue + rotateValue;
+				leftPower = -Math.max(-forwardValue, rotationValue);
+				rightPower = forwardValue + rotationValue;
 			} else
 			{
-				leftPower = moveValue - rotateValue;
-				rightPower = -Math.max(-moveValue, -rotateValue);
+				leftPower = forwardValue - rotationValue;
+				rightPower = -Math.max(-forwardValue, -rotationValue);
 			}
 		}
 		

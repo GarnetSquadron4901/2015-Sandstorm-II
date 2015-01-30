@@ -1,6 +1,9 @@
 package org.usfirst.frc.team1876.robot;
 
+import org.usfirst.frc.team1876.robot.io.LogitechController;
+
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.Joystick;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -11,7 +14,9 @@ import edu.wpi.first.wpilibj.IterativeRobot;
  */
 public class Robot extends IterativeRobot {
 
+	Joystick joy;
 	Drivetrain drivetrain;
+	LogitechController lc;
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -20,6 +25,8 @@ public class Robot extends IterativeRobot {
 	public void robotInit()
 	{
 		drivetrain = new Drivetrain();
+		joy = new Joystick(1);
+		lc = new LogitechController();
 	}
 
 	/**
@@ -35,7 +42,12 @@ public class Robot extends IterativeRobot {
 	 */
 	public void teleopPeriodic()
 	{
+		// Temporary!
+		double forward = lc.filterAxisDeadband(joy.getRawAxis(1));
+		double rotation = lc.filterAxisDeadband(joy.getRawAxis(4));
+		double strafe = lc.filterAxisDeadband(joy.getRawAxis(3)) - lc.filterAxisDeadband(joy.getRawAxis(2));
 		
+		drivetrain.FPSDrive(forward, rotation, strafe);
 	}
 
 	/**
