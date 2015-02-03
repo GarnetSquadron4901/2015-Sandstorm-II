@@ -6,6 +6,9 @@ import edu.wpi.first.wpilibj.Encoder;
 
 public class Encoder1 {
 	
+	//http://robotics.francisparker.org/javadoc/
+	//https://wpilib.screenstepslive.com/s/4485/m/13809/l/241875-encoders-measuring-rotation-of-a-wheel-or-other-shaft
+	
 	Encoder1 test;
 	double maxPer;
 	int minRate;
