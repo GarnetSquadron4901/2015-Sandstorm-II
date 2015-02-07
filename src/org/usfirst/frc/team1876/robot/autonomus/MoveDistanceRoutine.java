@@ -14,73 +14,36 @@ public class MoveDistanceRoutine {
 	
 	public void update (Robot rob) {
 		this.rob = rob;
+		
+		// move forward state
+		if (stateControl == 0) {
+			moveTimeBased(1000, 1, 1, 0, 1);
+		}
+		
+		// done moving stage
+		if (stateControl == 1) {
+			// do shit
+		}
 	}
 	
-	public void moveForward_1(){
+	public void moveTimeBased (int durancy, double rightPower, double leftPower, double strafePower, int terminationState){
 		
 		if(!isTimerStarted){
 			time.start();
 			isTimerStarted = true;
 		}
 		
-		if(stateControl == 0){
+		rob.Drivetrain.setMotors(leftPower, rightPower, strafePower);
 			
-			rob.Drivetrain.setMotors(1.0);
-			
-			if(time.get() > 4000){
-				stateControl = 1;
-				time.stop();
-				time.reset();
+		if(time.get() > durancy){
+			stateControl = terminationState;
+			time.stop();
+			time.reset();
 				
-				rob.Drivetrain.setMotors(0.0);
-				isTimerStarted = false;
-			}
+			rob.Drivetrain.setMotors(0, 0, 0);
+			isTimerStarted = false;
 		}
+		
 	}
-	
-	public void moveForward_2(){
-		
-		if(!isTimerStarted){
-			time.start();
-			isTimerStarted = true;
-		}
-		
-		if(stateControl == 0){
-			
-			rob.Drivetrain.setMotors(1.0);
-			
-			if(time.get() > 3000){
-				stateControl = 1;
-				time.stop();
-				time.reset();
-				
-				rob.Drivetrain.setMotors(0.0);
-				isTimerStarted = false;
-			}
-		}
-	}
-	
-	public void moveForward_3(){
-		
-		if(!isTimerStarted){
-			time.start();
-			isTimerStarted = true;
-		}
-		
-		if(stateControl == 0){
-			
-			rob.Drivetrain.setMotors(1.0);
-			
-			if(time.get() > 4000){
-				stateControl = 1;
-				time.stop();
-				time.reset();
-				
-				rob.Drivetrain.setMotors(0.0);
-				isTimerStarted = false;
-			}
-		}
-	}
-	
 	
 }
