@@ -22,7 +22,7 @@ public class Drivetrain {
 
 	private Victor strafeVictor;
 
-	
+	//The following is the default constructor.... blah blah blah
 	public Drivetrain()
 	{
 		frontLeftTalon = new Talon(FRONT_LEFT_TALON_PWN);
@@ -43,8 +43,7 @@ public class Drivetrain {
 	 * @param rotationValue
 	 * @param strafePower
 	 */
-	public void FPSDrive(double forwardValue, double rotationValue,
-			double strafePower)
+	public void FPSDrive(double forwardValue, double rotationValue,	double strafePower)
 	{
 		double leftPower = 0.0;
 		double rightPower = 0.0;
