@@ -17,6 +17,8 @@ public class Robot extends IterativeRobot {
 	Joystick joy;
 	Drivetrain drivetrain;
 	LogitechController lc;
+	
+	private int USB0 = 0;
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -25,7 +27,7 @@ public class Robot extends IterativeRobot {
 	public void robotInit()
 	{
 		drivetrain = new Drivetrain();
-		joy = new Joystick(1);
+		joy = new Joystick(USB0);
 		lc = new LogitechController();
 	}
 
