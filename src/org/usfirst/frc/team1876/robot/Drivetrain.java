@@ -13,6 +13,11 @@ public class Drivetrain {
 	private final int BACK_RIGHT_TALON_PWN = 0;
 
 	private final int STRAFE_VICTOR_PWN = 4;
+	
+	private final double FULLSPEED = 1.0;
+	private final double HALFSPEED = 0.5;
+	private final double QUARTERSPEED = 0.25;
+	
 
 	private Talon frontLeftTalon;
 	private Talon frontRightTalon;
@@ -43,7 +48,7 @@ public class Drivetrain {
 	 * @param rotationValue
 	 * @param strafePower
 	 */
-	public void FPSDrive(double forwardValue, double rotationValue,	double strafePower)
+	public void FPSDrive(double forwardValue, double rotationValue,	double strafePower, boolean HALFPOW, boolean QUARTPOW)
 	{
 		double leftPower = 0.0;
 		double rightPower = 0.0;
@@ -72,7 +77,16 @@ public class Drivetrain {
 			}
 		}
 		
-		setMotors(leftPower, rightPower, strafePower);
+		if(HALFPOW){
+			setMotors(leftPower, rightPower, strafePower, HALFSPEED);	
+		}else{
+			if(QUARTPOW){
+				setMotors(leftPower, rightPower, strafePower, QUARTERSPEED);	
+			}
+			else{
+				setMotors(leftPower, rightPower, strafePower, FULLSPEED);
+			}
+		}
 	}
 	
 	/**
@@ -82,12 +96,12 @@ public class Drivetrain {
 	 * @param rp right power
 	 * @param sp strafe power
 	 */
-	public void setMotors(double lp, double rp, double sp) {
-		frontLeftTalon.set(lp);
-		backLeftTalon.set(lp);
-		frontRightTalon.set(-rp);
-		backRightTalon.set(-rp);
-		strafeVictor.set(sp);
+	public void setMotors(double lp, double rp, double sp, double reduc) {
+		frontLeftTalon.set(lp * reduc);
+		backLeftTalon.set(lp * reduc);
+		frontRightTalon.set(-rp * reduc);
+		backRightTalon.set(-rp * reduc);
+		strafeVictor.set(sp * reduc);
 	}
 	
 	
