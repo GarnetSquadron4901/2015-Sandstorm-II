@@ -77,6 +77,7 @@ public class Drivetrain {
 			}
 		}
 		
+		//Added boolean operators for seting speed reductions
 		if(HALFPOW){
 			setMotors(leftPower, rightPower, strafePower, HALFSPEED);	
 		}else{
