@@ -4,6 +4,7 @@ import org.usfirst.frc.team1876.robot.io.LogitechController;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.Compressor;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -17,6 +18,7 @@ public class Robot extends IterativeRobot {
 	Joystick joy;
 	Drivetrain drivetrain;
 	LogitechController lc;
+	Compressor AIR;
 	
 	private int USB0 = 0;
 
@@ -26,6 +28,7 @@ public class Robot extends IterativeRobot {
 	 */
 	public void robotInit()
 	{
+		AIR = new Compressor();
 		drivetrain = new Drivetrain();
 		joy = new Joystick(USB0);
 		lc = new LogitechController();
@@ -44,6 +47,7 @@ public class Robot extends IterativeRobot {
 	 */
 	public void teleopPeriodic()
 	{
+		AIR.start();
 		// Temporary!
 		double forward = lc.filterAxisDeadband(joy.getRawAxis(1));
 		double rotation = lc.filterAxisDeadband(joy.getRawAxis(4));
