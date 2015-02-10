@@ -102,7 +102,7 @@ public class Drivetrain {
 		backLeftTalon.set(lp * reduc);
 		frontRightTalon.set(-rp * reduc);
 		backRightTalon.set(-rp * reduc);
-		strafeVictor.set(sp * reduc);
+		strafeVictor.set(sp);
 	}
 	
 	
