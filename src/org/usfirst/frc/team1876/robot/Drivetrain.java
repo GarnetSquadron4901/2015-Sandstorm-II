@@ -78,10 +78,10 @@ public class Drivetrain {
 		}
 		
 		//Added boolean operators for seting speed reductions
-		if(HALFPOW){
+		if(HALFPOW && !QUARTPOW){
 			setMotors(leftPower, rightPower, strafePower, HALFSPEED);	
 		}else{
-			if(QUARTPOW){
+			if(QUARTPOW && !HALFPOW){
 				setMotors(leftPower, rightPower, strafePower, QUARTERSPEED);	
 			}
 			else{
