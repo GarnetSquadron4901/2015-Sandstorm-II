@@ -96,6 +96,7 @@ public class Drivetrain {
 	 * @param lp left power
 	 * @param rp right power
 	 * @param sp strafe power
+	 * @param reduc reduction multiple
 	 */
 	public void setMotors(double lp, double rp, double sp, double reduc) {
 		frontLeftTalon.set(lp * reduc);
