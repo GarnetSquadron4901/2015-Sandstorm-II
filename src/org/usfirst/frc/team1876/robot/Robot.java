@@ -19,6 +19,7 @@ public class Robot extends IterativeRobot {
 	Drivetrain drivetrain;
 	LogitechController lc;
 	Compressor AIR;
+	Lift LIFT;
 	
 	private int USB0 = 0;
 
@@ -30,6 +31,7 @@ public class Robot extends IterativeRobot {
 	{
 		AIR = new Compressor();
 		drivetrain = new Drivetrain();
+		LIFT = new LIFT();
 		joy = new Joystick(USB0);
 		lc = new LogitechController();
 	}
@@ -54,6 +56,8 @@ public class Robot extends IterativeRobot {
 		double strafe = lc.filterAxisDeadband(joy.getRawAxis(3)) - lc.filterAxisDeadband(joy.getRawAxis(2));
 		
 		drivetrain.FPSDrive(forward, rotation, strafe);
+		
+		setStage(joy.getRawBtn(0),joy.getRawBtn(1));
 	}
 
 	/**
