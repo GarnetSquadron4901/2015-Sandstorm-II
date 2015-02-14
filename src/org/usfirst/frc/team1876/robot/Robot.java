@@ -3,7 +3,6 @@ package org.usfirst.frc.team1876.robot;
 import org.usfirst.frc.team1876.robot.io.LogitechController;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
-import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Compressor;
 
 /**
@@ -15,11 +14,10 @@ import edu.wpi.first.wpilibj.Compressor;
  */
 public class Robot extends IterativeRobot {
 
-	Joystick joy;
 	Drivetrain drivetrain;
 	LogitechController lc;
 	Compressor AIR;
-	Lift LIFT;
+	Lift lift;
 	
 	private int USB0 = 0;
 
@@ -31,9 +29,8 @@ public class Robot extends IterativeRobot {
 	{
 		AIR = new Compressor();
 		drivetrain = new Drivetrain();
-		LIFT = new LIFT();
-		joy = new Joystick(USB0);
-		lc = new LogitechController();
+		lift = new Lift();
+		lc = new LogitechController(USB0);
 	}
 
 	/**
@@ -49,15 +46,16 @@ public class Robot extends IterativeRobot {
 	 */
 	public void teleopPeriodic()
 	{
+		// I think we should start the air compressor in the robotInit()
 		AIR.start();
-		// Temporary!
-		double forward = lc.filterAxisDeadband(joy.getRawAxis(1));
-		double rotation = lc.filterAxisDeadband(joy.getRawAxis(4));
-		double strafe = lc.filterAxisDeadband(joy.getRawAxis(3)) - lc.filterAxisDeadband(joy.getRawAxis(2));
 		
-		drivetrain.FPSDrive(forward, rotation, strafe);
+		double forward = lc.getLeftAxisY();
+		double rotation = lc.getRightAxisX();
+		double strafe = lc.getThrottle();
 		
-		setStage(joy.getRawBtn(0),joy.getRawBtn(1));
+		drivetrain.FPSDrive(forward, rotation, strafe, true, false);
+		
+	    lift.setStage(lc.isAButtonPressed(),lc.isBButtonPressed());
 	}
 
 	/**
