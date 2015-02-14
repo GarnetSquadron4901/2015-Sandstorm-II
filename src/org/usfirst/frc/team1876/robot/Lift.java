@@ -16,8 +16,18 @@ public class Lift{
         BottomStage = new Solenoid(BS_port);
     }
     
-    public void setStage (boolean TS, boolean BS){
-        TopStage.set(TS);
-        BottomStage.set(BS);
+    public void setStage (boolean A, boolean B){
+        if(A){
+            TopStage.set(true);
+            BottomStage.set(true);
+        }else{
+            if(B){
+                TopStage.set(true);
+                BottomStage.set(false);                
+            }else{
+                TopStage.set(false);
+                BottomStage.set(false);                
+            }
+        }
     }
 }
