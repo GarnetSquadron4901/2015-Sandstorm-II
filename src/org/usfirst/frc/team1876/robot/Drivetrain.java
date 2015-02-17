@@ -6,36 +6,28 @@ import edu.wpi.first.wpilibj.Victor;
 public class Drivetrain {
 
 	// TODO set constants
-	private final int FRONT_LEFT_TALON_PWN = 2;
-	private final int FRONT_RIGHT_TALON_PWN = 1;
 
-	private final int BACK_LEFT_TALON_PWN = 3;
-	private final int BACK_RIGHT_TALON_PWN = 0;
+	private final int RIGHTTALONPWN = 0;
+	private final int LEFTTALON_PWN = 1;
 
-	private final int STRAFE_VICTOR_PWN = 4;
+	private final int STRAFE_VICTOR_PWN = 3;
 	
 	private final double FULLSPEED = 1.0;
 	private final double HALFSPEED = 0.5;
 	private final double QUARTERSPEED = 0.25;
 	
 
-	private Talon frontLeftTalon;
-	private Talon frontRightTalon;
-
-	private Talon backLeftTalon;
-	private Talon backRightTalon;
+	private Talon LeftTalon;
+	private Talon RightTalon;
 
 	private Victor strafeVictor;
 
 	//The following is the default constructor.... blah blah blah
 	public Drivetrain()
 	{
-		frontLeftTalon = new Talon(FRONT_LEFT_TALON_PWN);
-		frontRightTalon = new Talon(FRONT_RIGHT_TALON_PWN);
-
-		backLeftTalon = new Talon(BACK_LEFT_TALON_PWN);
-		backRightTalon = new Talon(BACK_RIGHT_TALON_PWN);
-
+		LeftTalon = new Talon(LEFT_TALON_PWN);
+		RightTalon = new Talon(RIGHT_TALON_PWN);
+		
 		strafeVictor = new Victor(STRAFE_VICTOR_PWN);
 	}
 
@@ -99,10 +91,8 @@ public class Drivetrain {
 	 * @param reduc reduction multiple
 	 */
 	public void setMotors(double lp, double rp, double sp, double reduc) {
-		frontLeftTalon.set(lp * reduc);
-		backLeftTalon.set(lp * reduc);
-		frontRightTalon.set(-rp * reduc);
-		backRightTalon.set(-rp * reduc);
+		LeftTalon.set(lp * reduc);
+	        RightTalon.set(-rp * reduc);
 		strafeVictor.set(sp);
 	}
 	
