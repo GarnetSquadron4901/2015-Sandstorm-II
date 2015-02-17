@@ -4,6 +4,7 @@ import org.usfirst.frc.team1876.robot.io.LogitechController;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Compressor;
+import edu.wpi.first.wpilibj.Relay;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -18,6 +19,7 @@ public class Robot extends IterativeRobot {
 	LogitechController lc;
 	Compressor AIR;
 	Lift lift;
+	Relay Compressor;
 	
 	private int USB0 = 0;
 
@@ -28,6 +30,7 @@ public class Robot extends IterativeRobot {
 	public void robotInit()
 	{
 		AIR = new Compressor();
+		Compressor = new Relay(1);
 		drivetrain = new Drivetrain();
 		lift = new Lift();
 		lc = new LogitechController(USB0);
@@ -47,7 +50,15 @@ public class Robot extends IterativeRobot {
 	public void teleopPeriodic()
 	{
 		// I think we should start the air compressor in the robotInit()
+		// You can not start the compressor in the robotInit()
 		AIR.start();
+		if(AIR.isEnabled()){
+			Compressor.set(Relay.Value.kForward);
+		}else{
+			Compressor.set(Relay.Value.kOff);
+		}
+		
+		
 		
 		double forward = lc.getLeftAxisY();
 		double rotation = lc.getRightAxisX();
