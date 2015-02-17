@@ -16,12 +16,13 @@ import edu.wpi.first.wpilibj.Relay;
 public class Robot extends IterativeRobot {
 
 	Drivetrain drivetrain;
-	LogitechController lc;
+	LogitechController lc, lc2;
 	Compressor AIR;
 	Lift lift;
 	Relay Compressor;
 	
 	private int USB0 = 0;
+	private int USB1 = 1;
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -34,6 +35,7 @@ public class Robot extends IterativeRobot {
 		drivetrain = new Drivetrain();
 		lift = new Lift();
 		lc = new LogitechController(USB0);
+		lc2 = new LogitechController(USB1);
 	}
 
 	/**
@@ -66,7 +68,7 @@ public class Robot extends IterativeRobot {
 		
 		drivetrain.FPSDrive(forward, rotation, strafe, true, false);
 		
-	    lift.setStage(lc.isAButtonPressed(),lc.isBButtonPressed());
+	    lift.setStage(lc2.isAButtonPressed(), lc2.isBButtonPressed());
 	}
 
 	/**
