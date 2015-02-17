@@ -20,6 +20,7 @@ public class Robot extends IterativeRobot {
 	Compressor AIR;
 	Lift lift;
 	Relay Compressor;
+	Arm ContainerARM;
 	
 	private int USB0 = 0;
 	private int USB1 = 1;
@@ -36,6 +37,7 @@ public class Robot extends IterativeRobot {
 		lift = new Lift();
 		lc = new LogitechController(USB0);
 		lc2 = new LogitechController(USB1);
+		ContainerARM = new Arm();
 	}
 
 	/**
@@ -68,7 +70,10 @@ public class Robot extends IterativeRobot {
 		
 		drivetrain.FPSDrive(forward, rotation, strafe, true, false);
 		
-	    lift.setStage(lc2.isAButtonPressed(), lc2.isBButtonPressed());
+	    	lift.setStage(lc2.isAButtonPressed(), lc2.isBButtonPressed());
+	    	
+	    	ContainerARM.ArmControl(lc2.getLeftAxisY());
+	    	ContainerARM.setArmStage(lc2.isLeftBumperPressed());
 	}
 
 	/**
