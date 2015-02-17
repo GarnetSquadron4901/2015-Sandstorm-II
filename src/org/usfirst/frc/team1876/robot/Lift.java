@@ -2,6 +2,7 @@ package org.usfirst.frc.team1876.robot;
 
 import edu.wpi.first.wpilibj.Solenoid;
 
+
 public class Lift{
 
     private final int TS_port = 0;
@@ -9,7 +10,6 @@ public class Lift{
 
     private Solenoid TopStage;
     private Solenoid BottomStage;
-
 
     public Lift(){
         TopStage = new Solenoid(TS_port);
