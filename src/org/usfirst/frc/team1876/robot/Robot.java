@@ -56,7 +56,7 @@ public class Robot extends IterativeRobot {
 		// I think we should start the air compressor in the robotInit()
 		// You can not start the compressor in the robotInit()
 		AIR.start();
-		if(AIR.isEnabled()){
+		if(AIR.enabled()){
 			Compressor.set(Relay.Value.kForward);
 		}else{
 			Compressor.set(Relay.Value.kOff);

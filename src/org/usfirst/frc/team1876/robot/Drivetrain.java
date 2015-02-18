@@ -7,8 +7,8 @@ public class Drivetrain {
 
 	// TODO set constants
 
-	private final int RIGHTTALONPWN = 0;
-	private final int LEFTTALON_PWN = 1;
+	private final int RIGHT_TALON_PWN = 0;
+	private final int LEFT_TALON_PWN = 1;
 
 	private final int STRAFE_VICTOR_PWN = 3;
 	

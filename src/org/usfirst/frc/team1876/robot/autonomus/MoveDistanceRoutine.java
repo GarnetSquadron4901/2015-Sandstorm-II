@@ -1,6 +1,7 @@
 package org.usfirst.frc.team1876.robot.autonomus;
 
 import org.usfirst.frc.team1876.robot.Robot;
+import edu.wpi.first.wpilibj.Timer;
 
 public class MoveDistanceRoutine {
 	private Robot rob;
@@ -33,14 +34,14 @@ public class MoveDistanceRoutine {
 			isTimerStarted = true;
 		}
 		
-		rob.Drivetrain.setMotors(leftPower, rightPower, strafePower);
+		//rob.Drivetrain.setMotors(leftPower, rightPower, strafePower);
 			
 		if(time.get() > durancy){
 			stateControl = terminationState;
 			time.stop();
 			time.reset();
 				
-			rob.Drivetrain.setMotors(0, 0, 0);
+		//	rob.Drivetrain.setMotors(0, 0, 0);
 			isTimerStarted = false;
 		}
 		
