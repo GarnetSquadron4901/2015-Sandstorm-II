@@ -1,9 +1,12 @@
 package org.usfirst.frc.team1876.robot;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Victor;
 
 public class Arm{
+	
+	DigitalInput limitSwitch;
 
   private final int ContainerARM_1 = 2;
   private final int ContainerARM_2 = 3;
