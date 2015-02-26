@@ -1,8 +1,13 @@
 package org.usfirst.frc.team1876.robot;
-
+//package should have 3490 in it
 import edu.wpi.first.wpilibj.Timer;
 
 public class GrabContainersAuto {
+	
+	/**
+	 * If this code works then it was written by Bradley Faircloth. If it doesn't not then
+	 * I'm not sure who wrote this, probably 3824
+	 */
 
 	private Robot robo;
 	private AutoDrive drive;
@@ -16,17 +21,13 @@ public class GrabContainersAuto {
 		robo.limitSwitch.get();
 		if(robo.limitSwitch.equals(false))
 		{
+			timer.reset();
 			aMethod(robo.ContainerARM);
 		}
 		else
 		{
+			timer.reset();
 			bMethod(robo.ContainerARM);
-			//I will have to double check to see if this will run the AutoDrive or I just need to call drive
-			//I'll double check with Andrew as well to make sure  but I think last one will work
-			drive.stateControl = 0;
-			//or
-			drive.update(robo);
-			//or
 			drive.moveTimeBased(2000, 1.0, 1.0, 0, 1);
 			
 		}
@@ -38,16 +39,23 @@ public class GrabContainersAuto {
 	
 	/**Some things that need to be fixed is to allow the arm to slow down and not try to brute stop it
 		Also the timer delay/timer in general needs to be fixed
-		Maybe I could make this when it can be more purposeful?
+		Maybe I could make this where it can be more purposeful?
 	*/
 	public void aMethod(Arm anArm)
 	{
 		while(robo.limitSwitch.equals(false)) 
 		{
 			timer.start();
-		anArm.ArmControl(1.0);
-		timer.delay(1);
-		anArm.setArmStage(true);
+			anArm.ArmControl(1.0);
+			if(timer.get() == 1.0)
+			{
+				anArm.setArmStage(true);
+			}		
+		}
+		if(robo.limitSwitch.equals(true))
+		{
+			anArm.ArmControl(0);
+			timer.stop();
 		}
 		
 	}
@@ -55,14 +63,14 @@ public class GrabContainersAuto {
 	public void bMethod(Arm anArm)
 	{
 		anArm.setArmStage(false);
-		timer.stop();
-		timer.reset();
 		timer.start();
-		anArm.ArmControl(-1.0);
-		if(timer.equals(2))
+		while(timer.get() != 2.0)
 		{
-			anArm.ArmControl(0);
+			anArm.ArmControl(-1.0);
 		}
+		anArm.ArmControl(0);
+		timer.stop();
+		
 		
 	}
 
