@@ -12,24 +12,47 @@ public class MoveDistanceRoutine {
 	public void update (Robot rob) {
 		this.rob = rob;
 		
-		// move forward state
+		// 
 		if (stateControl == 0) {
 			if (!isTimerStarted) {
 				isTimerStarted = true;
 				time.start();
 			}
 			
+			if (rob.limitSwitch.get() == false) {
 			// move the arm slowly in a direction
 			// THIS DIRECTION WILL NEED TO BE VERIFIED!!!!
 			rob.ContainerARM.ArmControl(0.1);
+			rob.setArmStage(true);
+			
+			} else {
+				isTimerStarted = false;
+				stateControl = 1;
+			}
 			
 			
-			moveTimeBased(1000, 1, 1, 0, 1);
+			//moveTimeBased(1000, 1, 1, 0, 1);
 		}
 		
-		// done moving stage
+		// 
 		if (stateControl == 1) {
-			// do shit
+			if (!isTimerStarted) {
+				isTimerStarted = true;
+				time.start();
+			}
+			
+			if (time.get() > 1000) {
+				// move the arm slowly in a direction
+				// THIS DIRECTION WILL NEED TO BE VERIFIED!!!!
+				rob.setArmStage(false);
+				rob.ContainerARM.ArmControl(-0.1);
+				rob.Drivetrain.setMotors(0.1, 0.1, 0);
+			} else {
+				isTimerStarted = false;
+				stateControl = 2;
+				rob.ContainerARM.ArmControl(0);
+				rob.Drivetrain.setMotors(0, 0, 0);
+			}
 		}
 	}
 	
