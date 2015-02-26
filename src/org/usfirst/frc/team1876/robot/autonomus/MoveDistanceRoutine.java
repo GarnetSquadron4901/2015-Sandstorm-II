@@ -28,6 +28,8 @@ public class MoveDistanceRoutine {
 			} else {
 				isTimerStarted = false;
 				stateControl = 1;
+				time.stop();
+				time.reset();
 			}
 			
 			
@@ -52,7 +54,13 @@ public class MoveDistanceRoutine {
 				stateControl = 2;
 				rob.ContainerARM.ArmControl(0);
 				rob.Drivetrain.setMotors(0, 0, 0);
+				time.stop();
+				time.reset();
 			}
+		}
+		
+		if (stateControl == 3) {
+			moveTimeBased(2000, 0.5, 0.5, 0, 4);
 		}
 	}
 	
